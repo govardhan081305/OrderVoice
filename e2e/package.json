@@ -1,0 +1,15 @@
+{
+  "name": "ordervoice-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node call-flow.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}

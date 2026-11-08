@@ -1,0 +1,15 @@
+{
+  "name": "ordervoice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Food delivery app with free, private, two-way in-app calls scoped to an Order ID (WebRTC).",
+  "scripts": {
+    "setup": "npm --prefix server install && npm --prefix client install && npm --prefix e2e install",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "test:e2e": "npm run build && node e2e/call-flow.mjs"
+  }
+}

@@ -1,0 +1,28 @@
+# Production-style deployment on ONE cloud VM (e.g. AWS EC2 / Oracle Cloud free tier):
+#   - ordervoice: app + signaling server (put it behind HTTPS, see README)
+#   - coturn:     your own TURN relay server
+#
+#   cp ../server/.env.example .env   # set JWT_SECRET, TURN_URLS, TURN_SECRET
+#   docker compose up -d --build
+services:
+  ordervoice:
+    build: ..
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+    ports:
+      - "4000:4000"
+    volumes:
+      - ordervoice-data:/data
+
+  coturn:
+    image: coturn/coturn:latest
+    restart: unless-stopped
+    # TURN needs many UDP ports; host networking is simplest and fastest.
+    network_mode: host
+    volumes:
+      - ./turnserver.conf:/etc/coturn/turnserver.conf:ro
+
+volumes:
+  ordervoice-data:
